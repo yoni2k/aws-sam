@@ -1,0 +1,16 @@
+# SAM File
+# Took the basis from https://github.com/awslabs/serverless-application-model/tree/master/examples/apps/hello-world-python3
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: A starter AWS Lambda function.
+Resources:
+  helloworldpython3:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: app.lambda_handler # source file name.handler function name
+      Runtime: python3.7
+      CodeUri: src/ # Directory of source file
+      Description: A starter AWS Lambda function.
+      MemorySize: 128
+      Timeout: 3

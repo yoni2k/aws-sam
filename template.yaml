@@ -1,5 +1,6 @@
 # SAM File
 # Took the basis from https://github.com/awslabs/serverless-application-model/tree/master/examples/apps/hello-world-python3
+# Then for API gateway: https://github.com/awslabs/serverless-application-model/tree/master/examples/apps/microservice-http-endpoint-python3
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
@@ -14,3 +15,9 @@ Resources:
       Description: A starter AWS Lambda function.
       MemorySize: 128
       Timeout: 3
+      Events:
+        HelloWorldSAMAPI:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET

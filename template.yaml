@@ -15,9 +15,26 @@ Resources:
       Description: A starter AWS Lambda function.
       MemorySize: 128
       Timeout: 3
-      Events:
+      Environment: # Setting envrionment variables TABLE_NAME and REGION_NAME
+        Variables:
+          TABLE_NAME: !Ref Table
+          REGION_NAME: !Ref AWS::Region
+      Events:  # Add API Gateway with the following APIs
         HelloWorldSAMAPI:
           Type: Api
           Properties:
             Path: /hello
             Method: GET
+      Policies: # Policy that allows to do CRUD operations on table Table
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Table
+
+  Table:  # Table in dynamodb
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: greeting
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
